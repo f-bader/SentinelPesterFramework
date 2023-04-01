@@ -14,7 +14,7 @@ param (
 
 BeforeDiscovery {
     if ( $CICDPathRoot ) {
-        $AnalyticsRulePath = Join-Path $CICDPathRoot "AnalyticsRules"
+        $AnalyticsRulePath = Join-Path $CICDPathRoot "AnalyticsRule"
         if ( Test-Path $AnalyticsRulePath ) {
             #region Create a test list of Analytics Rules
             $ArmTemplates = Get-ChildItem $AnalyticsRulePath -Recurse -File *.json

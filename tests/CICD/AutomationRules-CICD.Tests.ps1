@@ -15,7 +15,7 @@ param (
 
 BeforeDiscovery {
     if ($CICDPathRoot) {
-        $AutomationRulesPath = Join-Path $CICDPathRoot "AutomationRules"
+        $AutomationRulesPath = Join-Path $CICDPathRoot "AutomationRule"
         if ( $AutomationRulesPath ) {
             #region Create a test list of Automation Rules
             $ArmTemplates = Get-ChildItem $AutomationRulesPath -Recurse -File *.json
