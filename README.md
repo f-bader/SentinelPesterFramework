@@ -4,6 +4,8 @@
 
 The Sentinel Pester Framework is a community project meant to help you use PowerShell and [Pester](https://pester.dev/) to test your [Microsoft Sentinel](https://learn.microsoft.com/azure/sentinel/) infrastructure.
 
+You can find additional information in the related [blog Post](https://cloudbrothers.info/en/sentinel-pester-framework) on my website [cloudbrother.info](https://cloudbrothers.info/en/).
+
 There are multiple tests for different configuration settings of Microsoft Sentinel and the Log Analytics Workspace as well as tests for thing like Analytics Rules, Automation Actions, Dataconnectors and more.
 
 This is not meant as a ready to execute solution, but must be configured and modified for your specific environment.
