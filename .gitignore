@@ -1,0 +1,5 @@
+testResults.xml
+config.json
+/Sentinel/
+/src/Get-PesterTag.ps1
+/src/Get-PesterTest.ps1
