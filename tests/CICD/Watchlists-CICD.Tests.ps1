@@ -18,15 +18,9 @@ BeforeDiscovery {
         $AnalyticsRulePath = Join-Path $CICDPathRoot "AnalyticsRule"
         Write-Host "List all wachlists in $AnalyticsRulePath"
         if ( Test-Path $AnalyticsRulePath ) {
-            #region
+            #region Get all needed watchlist names
             $UsedWatchlistsObject = Select-String "_GetWatchlist\('.*?'\)" -Path "$AnalyticsRulePath/*"
-            $UsedWatchlistsObject | % {
-                Write-Host $_
-            }
             $UsedWatchlists = @( $UsedWatchlistsObject.Matches.Value -replace "_GetWatchlist\('(.*?)'\)", '$1' | Select-Object -Unique )
-            if ( [string]::IsNullOrWhiteSpace($UsedWatchlists) ) {
-                $UsedWatchlists = $null
-            }
             #endregion
         }
     }
@@ -42,9 +36,11 @@ BeforeAll {
 
 Describe "Watchlists" -Tag "Watchlists-CICD" -ForEach $UsedWatchlists {
 
+    $Watchlists = $_
+
     It "Watchlist <_> used by Analytics Rules is deployed" {
-        $Item = $CurrentItems | Where-Object { $_.name -match $_ }
-        $Item.name | Should -Be $_
+        $Item = $CurrentItems | Where-Object { $_.name -match $Watchlists }
+        $Item.name | Should -Be $Watchlists
     }
 
 }
