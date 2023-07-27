@@ -15,8 +15,7 @@ param (
 
 BeforeDiscovery {
     if ( $CICDPathRoot ) {
-        $AnalyticsRulePath = Join-Path $CICDPathRoot "AnalyticsRule"
-        Write-Host "List all wachlists in $AnalyticsRulePath"
+        $AnalyticsRulePath = Join-Path $CICDPathRoot "AnalyticsRules"
         if ( Test-Path $AnalyticsRulePath ) {
             #region Get all needed watchlist names
             $UsedWatchlistsObject = Select-String "_GetWatchlist\('.*?'\)" -Path "$AnalyticsRulePath/*"
@@ -36,11 +35,14 @@ BeforeAll {
 
 Describe "Watchlists" -Tag "Watchlists-CICD" -ForEach $UsedWatchlists {
 
-    $Watchlists = $_
+    BeforeAll {
+        $CurrentWatchlist = $_
+        Write-Host $CurrentWatchlist
+    }
 
     It "Watchlist <_> used by Analytics Rules is deployed" {
-        $Item = $CurrentItems | Where-Object { $_.name -match $Watchlists }
-        $Item.name | Should -Be $Watchlists
+        $Item = $CurrentItems | Where-Object { $_.name -match $CurrentWatchlist }
+        $Item.name | Should -Be $CurrentWatchlist
     }
 
 }
