@@ -15,7 +15,7 @@ param (
 
 BeforeDiscovery {
     if ( $CICDPathRoot ) {
-        $AnalyticsRulePath = Join-Path $CICDPathRoot "AnalyticsRules"
+        $AnalyticsRulePath = Join-Path $CICDPathRoot "AnalyticsRule"
         Write-Host "List all wachlists in $AnalyticsRulePath"
         if ( Test-Path $AnalyticsRulePath ) {
             #region
