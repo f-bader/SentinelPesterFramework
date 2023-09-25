@@ -46,17 +46,17 @@ BeforeAll {
 Describe "Automation Rules" -Tag "AutomationRules-CICD" {
 
     It "Automation rule <id> is present" -ForEach $AutomationRulesDefinition {
-        $Item = $CurrentItems | Where-Object { $_.name -match $id }
+        $Item = $CurrentItems | Where-Object name -match $id
         $Item.name | Should -Match $id
     }
 
     It "Automation rule <id> order is set to <order>" -ForEach $AutomationRulesDefinition {
-        $Item = $CurrentItems | Where-Object { $_.name -match $id }
+        $Item = $CurrentItems | Where-Object name -match $id
         $Item.properties.order | Should -Be $order
     }
 
     It "Automation rule <id> is <enabled>" -ForEach $AutomationRulesDefinition {
-        $Item = $CurrentItems | Where-Object { $_.name -match $id }
+        $Item = $CurrentItems | Where-Object name -match $id
         $Item.properties.triggeringLogic.isEnabled | Should -Be $enabled
     }
 }

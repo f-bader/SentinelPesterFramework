@@ -42,13 +42,13 @@ Describe "Analytics Rules" -Tag "AnalyticsRules" {
 
     It "Analytics rule <_> is present" -ForEach @( $AnalyticsRuleIds ) {
         $AnalyticsRuleId = $_
-        $AnalyticsRule = $CurrentItems | Where-Object { $_.id -match $AnalyticsRuleId }
+        $AnalyticsRule = $CurrentItems | Where-Object id -match $AnalyticsRuleId
         $AnalyticsRule.id | Should -Match $AnalyticsRuleId
     }
 
     It "Analytics rule <_> is enabled" -ForEach @( $AnalyticsRuleIds ) {
         $AnalyticsRuleId = $_
-        $AnalyticsRule = $CurrentItems | Where-Object { $_.id -match $AnalyticsRuleId }
+        $AnalyticsRule = $CurrentItems | Where-Object id -match $AnalyticsRuleId
         $AnalyticsRule.properties.enabled | Should -Be $true
     }
 }

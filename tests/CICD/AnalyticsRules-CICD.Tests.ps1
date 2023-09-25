@@ -52,23 +52,23 @@ Describe "Analytics Rules" -Tag "AnalyticsRules-CICD" {
     Context "Analytics rule `"<name>`" (<id>)" -ForEach $AnalyticsRulesDefinition {
 
         It "Analytics rule is present" {
-            $Item = $CurrentItems | Where-Object { $_.id -match $id }
+            $Item = $CurrentItems | Where-Object id -match $id
             $Item.id | Should -Match $id
         }
 
         It "Analytics rule name is set to <name>" {
-            $Item = $CurrentItems | Where-Object { $_.id -match $id }
+            $Item = $CurrentItems | Where-Object id -match $id
             $Item.properties.displayName | Should -Be $name
         }
 
         It "Analytics rule should not be in state `"AUTO DISABLED`"" {
             # https://learn.microsoft.com/en-us/azure/sentinel/detect-threats-custom#issue-a-scheduled-rule-failed-to-execute-or-appears-with-auto-disabled-added-to-the-name
-            $Item = $CurrentItems | Where-Object { $_.id -match $id }
+            $Item = $CurrentItems | Where-Object id -match $id
             $Item.properties.displayName  | Should -Not -Match "AUTO DISABLED"
         }
 
         It "Analytics rule is enabled" {
-            $Item = $CurrentItems | Where-Object { $_.id -match $id }
+            $Item = $CurrentItems | Where-Object id -match $id
             $Item.properties.enabled | Should -Be $true
         }
 
