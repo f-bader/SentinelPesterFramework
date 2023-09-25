@@ -37,19 +37,19 @@ BeforeAll {
 Describe "Sentinel Configuration" -Tag "Configuration", "Sentinel" {
 
     It "UEBA Source <_> is enabled" -ForEach "AuditLogs", "SecurityEvent", "SigninLogs", "AzureActivity" -Tag "UEBA" {
-        $SentinelSettings | Where-Object { $_.name -eq "Ueba" } | Select-Object -ExpandProperty properties | Select-Object -ExpandProperty dataSources | Should -Contain $_
+        $SentinelSettings | Where-Object name -eq "Ueba"  | Select-Object -ExpandProperty properties | Select-Object -ExpandProperty dataSources | Should -Contain $_
     }
 
     It "EntityAnalytics source <_> is enabled" -ForEach "ActiveDirectory", "AzureActiveDirectory" -Tag "EntityAnalytics" {
-        $SentinelSettings | Where-Object { $_.name -eq "EntityAnalytics" } | Select-Object -ExpandProperty properties | Select-Object -ExpandProperty entityProviders | Should -Contain $_
+        $SentinelSettings | Where-Object name -eq "EntityAnalytics" | Select-Object -ExpandProperty properties | Select-Object -ExpandProperty entityProviders | Should -Contain $_
     }
 
     It "Anomalies is enabled" -Tag "Anomalies" {
-        $SentinelSettings | Where-Object { $_.name -eq "Anomalies" } | Select-Object -ExpandProperty properties | Select-Object -ExpandProperty isEnabled | Should -Be $true
+        $SentinelSettings | Where-Object name -eq "Anomalies" | Select-Object -ExpandProperty properties | Select-Object -ExpandProperty isEnabled | Should -Be $true
     }
 
     It "Microsoft data access is enabled (EyesOn)" -Tag "EyesOn" {
-        $SentinelSettings | Where-Object { $_.name -eq "EyesOn" } | Select-Object -ExpandProperty properties | Select-Object -ExpandProperty isEnabled | Should -Be $true
+        $SentinelSettings | Where-Object name -eq "EyesOn" | Select-Object -ExpandProperty properties | Select-Object -ExpandProperty isEnabled | Should -Be $true
     }
 
     It "Diagnostic settings are send to the same Log Analytics workspace" -Tag "DiagnosticSettings" {
@@ -57,7 +57,7 @@ Describe "Sentinel Configuration" -Tag "Configuration", "Sentinel" {
     }
 
     It "All diagnostic settings are enabled" -Tag "DiagnosticSettings" {
-        $DiagnosticSettings.properties.logs | Where-Object { $_.enabled -eq $false } | Should -BeNullOrEmpty
+        $DiagnosticSettings.properties.logs | Where-Object enabled -eq $false | Should -BeNullOrEmpty
     }
 
     It "SentinelHealth should have current data (1d)" {
