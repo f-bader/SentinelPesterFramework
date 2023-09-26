@@ -39,13 +39,13 @@ Describe "Watchlist" -Tag "Watchlists" {
 
     It "Watchlist <name> is present" -ForEach $WatchListConfig {
         $WatchlistName = $name
-        $Watchlist = $CurrentItems | Where-Object { $_.name -eq $WatchlistName }
+        $Watchlist = $CurrentItems | Where-Object name -eq $WatchlistName 
         $Watchlist.name | Should -Match $WatchlistName
     }
 
     It "Watchlist <name> was updated in the last <maxAgeInDays> days" -ForEach $WatchListConfig {
         $WatchlistName = $name
-        $Watchlist = $CurrentItems | Where-Object { $_.name -eq $WatchlistName }
+        $Watchlist = $CurrentItems | Where-Object name -eq $WatchlistName 
         $ModifiedTime = New-TimeSpan -Start $watchList.systemData.lastModifiedAt -End (Get-Date)
         $ModifiedTime.TotalDays | Should -BeLessOrEqual $maxAgeInDays
     }
