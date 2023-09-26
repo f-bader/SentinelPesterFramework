@@ -41,7 +41,7 @@ Describe "Watchlists" -Tag "Watchlists-CICD" -ForEach $UsedWatchlists {
     }
 
     It "Watchlist <_> used by Analytics Rules is deployed" {
-        $Item = $CurrentItems | Where-Object { $_.name -match $CurrentWatchlist }
+        $Item = $CurrentItems | Where-Object name -match $CurrentWatchlist
         $Item.name | Should -Be $CurrentWatchlist
     }
 
